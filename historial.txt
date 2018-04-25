@@ -1,0 +1,14 @@
+SELECT * FROM exampleTable;
+prueba
+prueba2
+SELECT * FROM exampleTa
+prueba2dff
+SELECT * FROM names where id=5548;
+SELECT * FROM names where id=5588;
+SELECT * FROM names where id=5588 or id=5538;
+SELECT * FROM names where name like 'water';
+SELECT * FROM names where id=5585;
+SELECT id FROM names where id=5585;
+SELECT name FROM names where id=5585;
+SELECT TABLE_NAME, index_length from information_schema where TABLE_SCHEMA ='mydb'; 
+select c.name, c.chebi_accesSion, c.star, ch.chemical_data, co.created_on, da.accession_number FROM comments co, names n, chemical_data ch, compounds c, database_accession da where n.compound_id=co.compound_id and n.compound_id=ch.compound_id and n.compound_id=c.id and co.compound_id=ch.compound_id and co.compound_id=c.id and c.id=ch.compound_id and n.compound_id=da.compound_id and c.id=da.compound_id and co.compound_id=da.compound_id and ch.compound_id=da.compound_id and c.source=da.source and n.type like 'NAME' AND ch.type like '%MASS%' and co.created_on>='2017-01-01'; 
