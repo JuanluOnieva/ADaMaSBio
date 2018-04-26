@@ -14,6 +14,7 @@ public class Control implements ActionListener {
 	ViewMainPanel win ;
 	List<ViewMainPanel> panel;
 	archivo arch;
+	String[] databases = {"Chebi", "ChebiIndex", "ChebiStorage", "ChebiOptimize"};
 	
 	public Control(ViewMainPanel w, List<ViewMainPanel> p, archivo a) {
 		win = w ;
@@ -23,7 +24,6 @@ public class Control implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand( );
 		String s = (String) win.getComboBox().getSelectedItem();
-		
 		if (command == "Execute query"){
 			if(s!=null && !win.getHistorial().contains(s)){
 				win.changeText(s);
@@ -34,9 +34,12 @@ public class Control implements ActionListener {
 					if(v!=win)
 						v.notify(s);
 			}
-			win.getConn().executeQuery(s);
-			win.getCenterP().setSQLTime(win.getConn().getTime());
-			win.showResult(win.getConn().getRows());
+			for (String db : databases){
+				win.getConn().executeQuery("use " + db + ";");
+				win.getConn().executeQuery(s);
+				win.getCenterP(db).setSQLTime(win.getConn().getTime());
+				//win.showResult(win.getConn().getRows(), db);
+			}
 		}
 		
 	}

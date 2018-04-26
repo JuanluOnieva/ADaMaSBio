@@ -26,16 +26,20 @@ public class ViewMainPanel extends JPanel implements WindowPanel{
 	private JLabel state;
 	private NorthPanel npanel;
 	private GroupLayout g1_NorthPanel;
-	private CenterPanel cpanel;
+	private CenterPanel cpanelChebi;
+	private CenterPanel cpanelChebiIndex;
+	private CenterPanel cpanelChebiStorage;
+	private CenterPanel cpanelChebiOptimize;
 	public List<String> historial;
 	private DummySqlConnection dbCon;
 	
 	public ViewMainPanel(String SGDB, String status, List<String> hist, DummySqlConnection sqlCon){
 		dbCon = sqlCon;
 		historial = hist;
-		setLayout(new GridLayout(4, 1, 0, 0));
+		setLayout(new GridLayout(8, 2, 0, 0));
 		title = new JLabel(SGDB+" query executer");
 		title.setHorizontalAlignment(SwingConstants.CENTER);
+		title.setVerticalAlignment(SwingConstants.CENTER);
 		this.add(title);
 		npanel = new NorthPanel(status, hist);
 		
@@ -59,11 +63,22 @@ public class ViewMainPanel extends JPanel implements WindowPanel{
 					.addContainerGap(12, Short.MAX_VALUE))
 		);
 		npanel.setLayout(g1_NorthPanel);
-		cpanel = new CenterPanel();
+		
+		
+		cpanelChebi = new CenterPanel("Chebi");
+		cpanelChebiIndex = new CenterPanel("ChebiIndex");
+		cpanelChebiStorage = new CenterPanel("ChebiStorage");
+		cpanelChebiOptimize = new CenterPanel("ChebiOptimize");
+
 		this.add(npanel);
-		this.add(cpanel);
+		this.add(cpanelChebi);
+		this.add(cpanelChebiIndex);
+		this.add(cpanelChebiStorage);
+		this.add(cpanelChebiOptimize);
+		
 		state = new JLabel("Service status: " + status);
 		state.setHorizontalAlignment(SwingConstants.CENTER);
+		state.setVerticalAlignment(SwingConstants.CENTER);
 		this.add(state);
 	}
 
@@ -82,9 +97,18 @@ public class ViewMainPanel extends JPanel implements WindowPanel{
 		getComboBox().setSelectedItem(s);
 	}
 	
-	public void showResult(String result){
-		cpanel.showResult(result);
+	/*
+	public void showResult(String result, String dbName){
+		switch(dbName){
+			case "Chebi": cpanelChebi.showResult(result);
+			case "ChebiIndex": cpanelChebiIndex.showResult(result);
+			case "ChebiStorage": cpanelChebiStorage.showResult(result);
+			case "ChebiOptimize": cpanelChebiOptimize.showResult(result);
+			default: throw new RuntimeException("No hay base de datos con dicho nombre -> " + dbName);
+
+		}
 	}
+	*/
 
 
 	public JComboBox getComboBox() {
@@ -109,9 +133,15 @@ public class ViewMainPanel extends JPanel implements WindowPanel{
 		npanel.notify(s);
 	}
 	
-	public CenterPanel getCenterP() {
-		return cpanel;
-	}
+	public CenterPanel getCenterP(String dbName) {
+		switch(dbName){
+		case "Chebi": return cpanelChebi;
+		case "ChebiIndex": return cpanelChebiIndex;
+		case "ChebiStorage": return cpanelChebiStorage;
+		case "ChebiOptimize": return cpanelChebiOptimize;
+		default: throw new RuntimeException("No hay base de datos con dicho nombre -> " + dbName);
+
+	}	}
 	
 	public DummySqlConnection getConn() {
 		return dbCon;

@@ -1,5 +1,6 @@
 package org.uma.BDB2018.Interfaz;
 
+import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -16,6 +17,7 @@ public class NorthPanel extends JPanel{
 	private JButton button;
 	
 	public NorthPanel(String status, List<String> hist){
+		
 		comboBox = new JComboBox();
 		fillCombo(hist);
 		comboBox.setEditable(true);

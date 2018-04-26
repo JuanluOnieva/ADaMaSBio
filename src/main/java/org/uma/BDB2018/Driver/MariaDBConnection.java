@@ -8,7 +8,7 @@ public class MariaDBConnection extends DummySqlConnection{
 	
 	public MariaDBConnection() throws SQLException{
 		//create connection for a server installed in localhost, with a user "root" with no password
-        connection = DriverManager.getConnection("jdbc:mariadb://localhost:3316/chebi?user=root&password=BDB2018");
+        connection = DriverManager.getConnection("jdbc:mariadb://localhost:3316?user=root&password=BDB2018");
         time = 0;
         rowsNumber = 0;
 	}	
