@@ -34,8 +34,9 @@ public class Control implements ActionListener {
 					if(v!=win)
 						v.notify(s);
 			}
-			win.getCenterP().setSQLTime(win.getConn().executionTime(s));
-			win.showResult(win.getConn().executionNumber());
+			win.getConn().executeQuery(s);
+			win.getCenterP().setSQLTime(win.getConn().getTime());
+			win.showResult(win.getConn().getRows());
 		}
 		
 	}

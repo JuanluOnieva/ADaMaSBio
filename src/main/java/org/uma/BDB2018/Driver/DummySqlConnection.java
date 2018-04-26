@@ -1,33 +1,15 @@
 package org.uma.BDB2018.Driver;
 
+import java.sql.Connection;
 import java.util.Random;
 
-public class DummySqlConnection implements DBDriverInterface {
-
-	public DummySqlConnection(String url, String user, String password) {
-		mysqlConnect();
-	}
+public abstract class DummySqlConnection implements DBDriverInterface {
 	
-	public Boolean mysqlConnect() {
-		return true;
-	}
-
-	public String executeQuery(String query) {
-		return "Test result";
-	}
-
-	public float getExTime() {
-		Random n = new Random();
-		return n.nextFloat();
-	}
-
-	public String executionTime(String s) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String executionNumber() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	protected Connection connection;
+	protected long time;
+	protected int rowsNumber;
+	
+	public abstract void executeQuery(String query);
+	public abstract String getTime();
+	public abstract String getRows();
 }

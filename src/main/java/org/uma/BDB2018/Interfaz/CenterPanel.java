@@ -12,6 +12,8 @@ import javax.swing.SwingConstants;
 public class CenterPanel extends JPanel{
 	
 	private JTextPane txtpnQueryResult;
+	private JTextPane txtpnQueryResult2;
+
 	private JPanel centerRightPanel;
 	private JPanel panel_1;
 	private JPanel panel_2;
@@ -27,6 +29,11 @@ public class CenterPanel extends JPanel{
 		txtpnQueryResult.setEditable(false);
 		txtpnQueryResult.setText("Query result");
 		this.add(txtpnQueryResult);
+
+		txtpnQueryResult2 = new JTextPane();
+		txtpnQueryResult2.setEditable(false);
+		txtpnQueryResult2.setText("por aqui");
+		this.add(txtpnQueryResult2);
 		
 		centerRightPanel = new JPanel();
 		this.add(centerRightPanel);
@@ -53,11 +60,8 @@ public class CenterPanel extends JPanel{
 		//txts.setText(""+time.getSegundos());
 		panel_2.add(txts);
 		txts.setColumns(10);
+		
 	}
-	
-	/*public String getTime(){
-		return time.toString();
-	}*/
 	
 	public void showResult(String result){
 		txtpnQueryResult.setText(result);

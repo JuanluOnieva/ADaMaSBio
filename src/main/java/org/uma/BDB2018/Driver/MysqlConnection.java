@@ -1,36 +1,45 @@
 package org.uma.BDB2018.Driver;
+import java.sql.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import org.mariadb.jdbc.Driver;
 
-public class MysqlConnection extends DummySqlConnection{
-	String connectionString;
-	Connection conn = null;
+public class MySQLConnection extends DummySqlConnection{
 	
-	public MysqlConnection(String url, String user, String password) {
-		super(url, user, password);
-		connectionString="jdbc:" + url +"?" + "user=" + user + "&password=" + password;
-		mysqlConnect();
-	}
 	
-	public Boolean mysqlConnect() {
-		try {
-			conn = DriverManager.getConnection(connectionString);
-		} catch (SQLException ex) {
-			System.out.println("SQLException: " + ex.getMessage());
-		    System.out.println("SQLState: " + ex.getSQLState());
-		    System.out.println("VendorError: " + ex.getErrorCode());
-		    return false;
+	public MySQLConnection() throws SQLException{
+		//create connection for a server installed in localhost, with a user "root"
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/chebi?user=root&password=BDB2018");
+        time = 0;
+        rowsNumber = 0;
+	}	
+
+	public void executeQuery(String s){
+
+		// create a Statement
+		try (Statement stmt = connection.createStatement()){	
+			//execute query
+			time = 0;
+			rowsNumber = 0;
+			long timeBefore = System.currentTimeMillis();
+			try (ResultSet rs = stmt.executeQuery(s)){ 
+				time = System.currentTimeMillis() - timeBefore;
+				rs.last();
+				rowsNumber = rs.getRow();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		return true;
 	}
 
 	@Override
-	public String executeQuery(String query) {
-		// TODO Auto-generated method stub
-		return null;
+	public String getTime() {
+		return ""+time;
+	}
+
+	@Override
+	public String getRows() {
+		return ""+rowsNumber;
 	}
 	
-
 }

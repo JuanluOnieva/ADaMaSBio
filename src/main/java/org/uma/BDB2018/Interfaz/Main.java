@@ -71,13 +71,12 @@ public class Main extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane);
 		
-		DummySqlConnection dbTestConnection = new DummySqlConnection("Test","Test","Test");
-		//MariaDBConnection mariadb = new MariaDBConnection();
-		MySQLconnection mysql = new MySQLconnection();
+		MariaDBConnection mariadb = new MariaDBConnection();
+		//MySQLConnection mysql = new MySQLConnection();
 		
-		ViewMainPanel mainPanel = new ViewMainPanel("MySQL", "CONNECTED", historial, mysql);
+		ViewMainPanel mainPanel = new ViewMainPanel("MySQL", "CONNECTED", historial, mariadb);
 		panel.add(mainPanel);
-		ViewMainPanel mainPanel2 = new ViewMainPanel("MariaDB", "CONNECTED", historial, mysql);
+		ViewMainPanel mainPanel2 = new ViewMainPanel("MariaDB", "CONNECTED", historial, mariadb);
 		panel.add(mainPanel2);
 		
 		tabbedPane.addTab("Mysql DB", null, mainPanel, null);

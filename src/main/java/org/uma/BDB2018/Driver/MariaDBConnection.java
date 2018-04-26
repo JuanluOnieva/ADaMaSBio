@@ -5,38 +5,41 @@ import org.mariadb.jdbc.Driver;
 
 public class MariaDBConnection extends DummySqlConnection{
 	
-	private Connection conn;
-	private int num;
 	
 	public MariaDBConnection() throws SQLException{
-        super(null, null, null);
 		//create connection for a server installed in localhost, with a user "root" with no password
-        conn = DriverManager.getConnection("jdbc:mariadb://localhost:3316/chebi?user=root&password=250197");
-        num = 0;
+        connection = DriverManager.getConnection("jdbc:mariadb://localhost:3316/chebi?user=root&password=BDB2018");
+        time = 0;
+        rowsNumber = 0;
 	}	
 
-	public String executionTime(String s){
+	public void executeQuery(String s){
 
-		long timeAfter = 0;
 		// create a Statement
-		try (Statement stmt = conn.createStatement()){	
+		try (Statement stmt = connection.createStatement()){	
 			//execute query
-			num = 0;
+			time = 0;
+			rowsNumber = 0;
 			long timeBefore = System.currentTimeMillis();
 			try (ResultSet rs = stmt.executeQuery(s)){ 
-				timeAfter = System.currentTimeMillis() - timeBefore;
+				time = System.currentTimeMillis() - timeBefore;
 				rs.last();
-				num = rs.getRow();
+				rowsNumber = rs.getRow();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
-		return ""+timeAfter;
+	}
+
+	@Override
+	public String getTime() {
+		return ""+time;
+	}
+
+	@Override
+	public String getRows() {
+		return ""+rowsNumber;
 	}
 	
-	public String executionNumber(){
-		return ""+num;
-	}
 }
