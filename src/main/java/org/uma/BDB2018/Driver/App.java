@@ -7,16 +7,9 @@ public class App {
 
     public static void main( String[] args ) throws SQLException {
         //create connection for a server installed in localhost, with a user "root" with no password
-        try (Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3316/chebi?user=root&password=250197")){
-            // create a Statement
-            try (Statement stmt = conn.createStatement()) {
-                //execute query
-                try (ResultSet rs = stmt.executeQuery("SELECT compound_id FROM names where name like 'water'")) {
-                    //position result to first
-                    rs.first();
-                    System.out.println(rs.getString(1)); //result is "Hello World!"
-                }
-            }
-        }
+    	GenericSqlConnection con = new PostgreSqlConnection();
+    	con.executeQuery("SELECT compound_id FROM names where name like 'water'");
+    	System.out.println(con.getRows());
+    	System.out.println("Execution time: " + con.getTime() + "ms");
     }
 }
