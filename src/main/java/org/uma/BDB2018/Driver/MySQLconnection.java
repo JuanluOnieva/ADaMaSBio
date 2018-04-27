@@ -1,8 +1,6 @@
 package org.uma.BDB2018.Driver;
 import java.sql.*;
 
-import org.mariadb.jdbc.Driver;
-
 public class MySQLConnection extends GenericSqlConnection{
 	
 	
@@ -11,7 +9,7 @@ public class MySQLConnection extends GenericSqlConnection{
         connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/chebi?user=root&password=BDB2018");
         time = 0;
         rowsNumber = 0;
-	}	
+	}
 
 	public void executeQuery(String s){
 

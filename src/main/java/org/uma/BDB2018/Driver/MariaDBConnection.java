@@ -1,8 +1,6 @@
 package org.uma.BDB2018.Driver;
 import java.sql.*;
 
-import org.mariadb.jdbc.Driver;
-
 public class MariaDBConnection extends GenericSqlConnection{
 	
 	

@@ -1,7 +1,6 @@
 package org.uma.BDB2018.Driver;
 
 import java.sql.Connection;
-import java.util.Random;
 
 public abstract class GenericSqlConnection implements DBDriverInterface {
 	
