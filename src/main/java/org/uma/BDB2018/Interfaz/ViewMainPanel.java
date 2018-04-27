@@ -133,13 +133,13 @@ public class ViewMainPanel extends JPanel implements WindowPanel{
 		npanel.notify(s);
 	}
 	
-	public CenterPanel getCenterP(String dbName) {
-		switch(dbName){
-		case "Chebi": return cpanelChebi;
-		case "ChebiIndex": return cpanelChebiIndex;
-		case "ChebiStorage": return cpanelChebiStorage;
-		case "ChebiOptimize": return cpanelChebiOptimize;
-		default: throw new RuntimeException("No hay base de datos con dicho nombre -> " + dbName);
+	public CenterPanel getCenterP(int db) {
+		switch(db){
+		case 0: return cpanelChebi;
+		case 1: return cpanelChebiIndex;
+		case 2: return cpanelChebiStorage;
+		case 3: return cpanelChebiOptimize;
+		default: throw new RuntimeException("No hay base de datos con dicho nombre -> " + db);
 
 	}	}
 	

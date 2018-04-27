@@ -76,6 +76,10 @@ public class CenterPanel extends JPanel{
 		txts.setText(""+t+" ms");
 	}
 	
+	public void setErrorTime(String e) {
+		txts.setText("Error: "+e);
+	}
+	
 	public String getName(){
 		return name;
 	}

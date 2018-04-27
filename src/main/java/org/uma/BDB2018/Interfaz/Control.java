@@ -2,11 +2,8 @@ package org.uma.BDB2018.Interfaz;
 
 import java . awt . event.ActionEvent;
 import java . awt . event.ActionListener;
-import java.util.Calendar;
+import java.sql.SQLException;
 import java.util.List;
-
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
 
 
 public class Control implements ActionListener {
@@ -14,7 +11,7 @@ public class Control implements ActionListener {
 	ViewMainPanel win ;
 	List<ViewMainPanel> panel;
 	archivo arch;
-	String[] databases = {"Chebi", "ChebiIndex", "ChebiStorage", "ChebiOptimize"};
+	String[] databases = {"chebi_basic", "ChebiIndex", "ChebiStorage", "ChebiOptimize"};
 	
 	public Control(ViewMainPanel w, List<ViewMainPanel> p, archivo a) {
 		win = w ;
@@ -34,10 +31,19 @@ public class Control implements ActionListener {
 					if(v!=win)
 						v.notify(s);
 			}
-			for (String db : databases){
-				win.getConn().executeQuery("use " + db + ";");
-				win.getConn().executeQuery(s);
-				win.getCenterP(db).setSQLTime(win.getConn().getTime());
+			for (String db : win.getConn().availableDbs()){
+				try {
+					win.getConn().connect(db);
+					win.getConn().executeQuery(s);
+					win.getCenterP(win.getConn().dbAdapt(db)).setSQLTime(win.getConn().getTime());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					System.out.println(e1.getErrorCode());
+					System.out.println(e1.getSQLState());
+					System.out.println(e1.getCause());
+					win.getCenterP(win.getConn().dbAdapt(db)).setErrorTime("DB not found");
+				}
+
 				//win.showResult(win.getConn().getRows(), db);
 			}
 		}

@@ -1,9 +1,12 @@
 package org.uma.BDB2018.Driver;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Properties;
 
 public abstract class GenericSqlConnection implements DBDriverInterface {
 	
@@ -11,6 +14,8 @@ public abstract class GenericSqlConnection implements DBDriverInterface {
 	protected long time = 0;
 	protected int rowsNumber = 0;
 	protected String url;
+	protected Properties props = new Properties();
+	public ArrayList<String> databases = new ArrayList<String>();
 	
 	public void executeQuery(String s){
 
@@ -30,6 +35,12 @@ public abstract class GenericSqlConnection implements DBDriverInterface {
 		}
 	}
 
+	public void connect(String db) throws SQLException {
+		connection = DriverManager.getConnection(url+"/" + db, props);
+	}
+	
+	public abstract int dbAdapt(String dbName);
+	
 	@Override
 	public String getTime() {
 		return ""+time;
@@ -40,4 +51,7 @@ public abstract class GenericSqlConnection implements DBDriverInterface {
 		return ""+rowsNumber;
 	}
 
+	public ArrayList<String> availableDbs() {
+		return databases;
+	}
 }

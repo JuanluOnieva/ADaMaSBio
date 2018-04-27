@@ -71,23 +71,24 @@ public class Main extends JFrame {
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane);
 		
-		MariaDBConnection mariadb = new MariaDBConnection();
+		//MariaDBConnection mariadb = new MariaDBConnection();
+		PostgreSqlConnection psql = new PostgreSqlConnection();
 		//MySQLConnection mysql = new MySQLConnection();
 		
-		ViewMainPanel mainPanel = new ViewMainPanel("MySQL", "CONNECTED", historial, mariadb);
+		ViewMainPanel mainPanel = new ViewMainPanel("MySQL", "CONNECTED", historial, psql);
 		panel.add(mainPanel);
-		ViewMainPanel mainPanel2 = new ViewMainPanel("MariaDB", "CONNECTED", historial, mariadb);
-		panel.add(mainPanel2);
+		//ViewMainPanel mainPanel2 = new ViewMainPanel("MariaDB", "CONNECTED", historial, mariadb);
+		//panel.add(mainPanel2);
 		
 		tabbedPane.addTab("Mysql DB", null, mainPanel, null);
 		
-		tabbedPane.addTab("MariaDB", null, mainPanel2, null);
+		//tabbedPane.addTab("MariaDB", null, mainPanel2, null);
 		
 
 		ActionListener bt = new Control(mainPanel, panel, arch);
-		ActionListener bt2 = new Control(mainPanel2, panel, arch);
+		//ActionListener bt2 = new Control(mainPanel2, panel, arch);
 		mainPanel.controller(bt);
-		mainPanel2.controller(bt2);
+		//mainPanel2.controller(bt2);
 		this.pack();
 	}
 
