@@ -3,7 +3,7 @@ package org.uma.BDB2018.Driver;
 import java.sql.Connection;
 import java.util.Random;
 
-public abstract class DummySqlConnection implements DBDriverInterface {
+public abstract class GenericSqlConnection implements DBDriverInterface {
 	
 	protected Connection connection;
 	protected long time;

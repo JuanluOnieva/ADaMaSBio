@@ -3,7 +3,7 @@ import java.sql.*;
 
 import org.mariadb.jdbc.Driver;
 
-public class MySQLConnection extends DummySqlConnection{
+public class MySQLConnection extends GenericSqlConnection{
 	
 	
 	public MySQLConnection() throws SQLException{

@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 
 import javax.swing.GroupLayout.Alignment;
 
-import org.uma.BDB2018.Driver.DummySqlConnection;
+import org.uma.BDB2018.Driver.GenericSqlConnection;
 
 import javax.swing.JComboBox;
 
@@ -31,9 +31,9 @@ public class ViewMainPanel extends JPanel implements WindowPanel{
 	private CenterPanel cpanelChebiStorage;
 	private CenterPanel cpanelChebiOptimize;
 	public List<String> historial;
-	private DummySqlConnection dbCon;
+	private GenericSqlConnection dbCon;
 	
-	public ViewMainPanel(String SGDB, String status, List<String> hist, DummySqlConnection sqlCon){
+	public ViewMainPanel(String SGDB, String status, List<String> hist, GenericSqlConnection sqlCon){
 		dbCon = sqlCon;
 		historial = hist;
 		setLayout(new GridLayout(8, 2, 0, 0));
@@ -143,7 +143,7 @@ public class ViewMainPanel extends JPanel implements WindowPanel{
 
 	}	}
 	
-	public DummySqlConnection getConn() {
+	public GenericSqlConnection getConn() {
 		return dbCon;
 	}
 	

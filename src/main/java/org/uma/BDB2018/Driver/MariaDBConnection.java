@@ -3,7 +3,7 @@ import java.sql.*;
 
 import org.mariadb.jdbc.Driver;
 
-public class MariaDBConnection extends DummySqlConnection{
+public class MariaDBConnection extends GenericSqlConnection{
 	
 	
 	public MariaDBConnection() throws SQLException{
