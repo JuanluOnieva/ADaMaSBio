@@ -18,7 +18,6 @@ public abstract class GenericSqlConnection implements DBDriverInterface {
 	public ArrayList<String> databases = new ArrayList<String>();
 	
 	public void executeQuery(String s){
-
 		// create a Statement
 		try (Statement stmt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)){	
 			//execute query
@@ -41,12 +40,10 @@ public abstract class GenericSqlConnection implements DBDriverInterface {
 	
 	public abstract int dbAdapt(String dbName);
 	
-	@Override
 	public String getTime() {
 		return ""+time;
 	}
 
-	@Override
 	public String getRows() {
 		return ""+rowsNumber;
 	}
