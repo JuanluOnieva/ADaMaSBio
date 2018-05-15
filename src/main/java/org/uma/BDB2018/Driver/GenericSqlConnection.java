@@ -7,6 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
+/**
+ * 
+ * @author marcomunozperez
+ * TODO Add query exceptions
+ */
 
 public abstract class GenericSqlConnection implements DBDriverInterface {
 	
@@ -26,8 +31,7 @@ public abstract class GenericSqlConnection implements DBDriverInterface {
 			long timeBefore = System.currentTimeMillis();
 			try (ResultSet rs = stmt.executeQuery(s)){ 
 				time = System.currentTimeMillis() - timeBefore;
-				rs.last();
-				rowsNumber = rs.getRow();
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

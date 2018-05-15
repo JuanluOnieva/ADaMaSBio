@@ -76,12 +76,12 @@ public class Main extends JFrame {
 		PostgreSqlConnection psql = new PostgreSqlConnection();
 		//MySQLConnection mysql = new MySQLConnection();
 		
-		ViewMainPanel mainPanel = new ViewMainPanel("MySQL", "CONNECTED", historial, psql);
+		ViewMainPanel mainPanel = new ViewMainPanel("PostrgreSQL", "CONNECTED", historial, psql);
 		panel.add(mainPanel);
 		//ViewMainPanel mainPanel2 = new ViewMainPanel("MariaDB", "CONNECTED", historial, mariadb);
 		//panel.add(mainPanel2);
 		
-		tabbedPane.addTab("Mysql DB", null, mainPanel, null);
+		tabbedPane.addTab("PostrgreSQL", null, mainPanel, null);
 		
 		//tabbedPane.addTab("MariaDB", null, mainPanel2, null);
 		
