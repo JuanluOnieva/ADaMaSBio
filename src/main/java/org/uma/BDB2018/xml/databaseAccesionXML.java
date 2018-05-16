@@ -8,11 +8,11 @@ import java.util.List;
 
 public class databaseAccesionXML extends xml {
 
-    public databaseAccesionXML(ResultSet result) throws SQLException, IOException {
-        super(result);
+    public databaseAccesionXML() throws SQLException, IOException {
+        super();
     }
 
-    public void createXML() throws SQLException, IOException {
+    public void addValues(ResultSet result) throws SQLException, IOException {
         int cnt = 2;
         String label = null;
         String key = null;

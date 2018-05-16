@@ -15,19 +15,17 @@ import javax.xml.stream.events.Attribute;
 
 public abstract class xml {
 
-	ResultSet result;
 	String idprev;
 	FileWriter pw;
 	String id;
 	
-	public xml (ResultSet result) throws SQLException, IOException {
-		this.result = result;
+	public xml () throws SQLException, IOException {
 		idprev = "nada";
     	File fichero = new File("prueba.txt");
        	pw = new FileWriter(fichero, true);
 	}
 	
-public abstract void createXML() throws SQLException, IOException;
+public abstract void addValues(ResultSet result) throws SQLException, IOException;
 	
 	String startLabel(String id) {
 		return "<" + id + ">\n";

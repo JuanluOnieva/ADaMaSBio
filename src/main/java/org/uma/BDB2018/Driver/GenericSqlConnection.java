@@ -33,9 +33,11 @@ public abstract class GenericSqlConnection implements DBDriverInterface {
 			time = 0;
 			rowsNumber = 0;
 			long timeBefore = System.currentTimeMillis();
-			try (ResultSet rs = stmt.executeQuery(s)){ 
-				xml _xml = new chemicalData(rs);
-				_xml.createXML();
+			try (ResultSet rs = stmt.executeQuery(s)){
+			    //Generate XML from query result
+				xml _xml = new chemicalData();
+				_xml.addValues(rs);
+				((chemicalData) _xml).xmlEnd();
 				time = System.currentTimeMillis() - timeBefore;
 				
 			}
