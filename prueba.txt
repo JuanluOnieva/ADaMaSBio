@@ -1,0 +1,37 @@
+
+<table>
+<id>15377
+<chebi_accession>CHEBI:15377</chebi_accession>
+<name>water</name>
+<definition>An oxygen hydride consisting of an oxygen atom that is covalently bonded to two hydrogen atoms.</definition>
+<star>3</star>
+<secondary_id>5585</secondary_id>
+<secondary_id>10743</secondary_id>
+<secondary_id>13352</secondary_id>
+<secondary_id>27313</secondary_id>
+<secondary_id>42043</secondary_id>
+<secondary_id>42857</secondary_id>
+<secondary_id>43228</secondary_id>
+<secondary_id>44292</secondary_id>
+<secondary_id>44701</secondary_id>
+<secondary_id>44819</secondary_id>
+</id>
+</table>
+<table>
+<id>15377
+<chebi_accession>CHEBI:15377</chebi_accession>
+<name>water</name>
+<definition>An oxygen hydride consisting of an oxygen atom that is covalently bonded to two hydrogen atoms.</definition>
+<star>3</star>
+<secondary_id>5585</secondary_id>
+<secondary_id>10743</secondary_id>
+<secondary_id>13352</secondary_id>
+<secondary_id>27313</secondary_id>
+<secondary_id>42043</secondary_id>
+<secondary_id>42857</secondary_id>
+<secondary_id>43228</secondary_id>
+<secondary_id>44292</secondary_id>
+<secondary_id>44701</secondary_id>
+<secondary_id>44819</secondary_id>
+</id>
+</table>

@@ -17,11 +17,14 @@ public class archivo {
        	
         FileWriter fichero = null;
         PrintWriter pw = null;
+        
+
         try
         {
         	fichero = new FileWriter(nomFich);
            	pw = new PrintWriter(fichero); 
-           	for(String h : hist)
+        	
+        	for(String h : hist)
            		pw.println(h);
         
         } catch (Exception e) {
@@ -32,6 +35,7 @@ public class archivo {
         		// asegurarnos que se cierra el fichero.
         		if (null != fichero)
         			fichero.close();
+        			//pw.close();
         	} catch (Exception e2) {
         		e2.printStackTrace();
         	}
