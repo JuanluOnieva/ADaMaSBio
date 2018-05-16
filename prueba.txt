@@ -1,4 +1,3 @@
-
 <table>
 <id>15377
 <chebi_accession>CHEBI:15377</chebi_accession>
