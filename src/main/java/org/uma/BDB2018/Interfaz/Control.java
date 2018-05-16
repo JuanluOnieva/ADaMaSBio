@@ -2,6 +2,7 @@ package org.uma.BDB2018.Interfaz;
 
 import java . awt . event.ActionEvent;
 import java . awt . event.ActionListener;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -26,7 +27,12 @@ public class Control implements ActionListener {
 				win.changeText(s);
 				win.writeHistorial(s);
 				arch.escribir(win.getHistorial());
-				win.getConn().executeQuery(win.getComboBox().toString());
+				try {
+					win.getConn().executeQuery(win.getComboBox().toString());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				for(ViewMainPanel v : panel)
 					if(v!=win)
 						v.notify(s);
@@ -42,6 +48,9 @@ public class Control implements ActionListener {
 					System.out.println(e1.getSQLState());
 					System.out.println(e1.getCause());
 					win.getCenterP(win.getConn().dbAdapt(db)).setErrorTime("DB not found");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 
 				//win.showResult(win.getConn().getRows(), db);
