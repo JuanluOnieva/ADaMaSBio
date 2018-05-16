@@ -6,3 +6,6 @@
 .settings/org.eclipse.m2e.core.prefs
 .DS_Store
 .idea
+pom\.xml
+
+prueba\.txt

@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import org.uma.BDB2018.xml.chemicalData;
 import org.uma.BDB2018.xml.xml;
 /**
  * 
@@ -33,7 +34,8 @@ public abstract class GenericSqlConnection implements DBDriverInterface {
 			rowsNumber = 0;
 			long timeBefore = System.currentTimeMillis();
 			try (ResultSet rs = stmt.executeQuery(s)){ 
-				xml _xml = new xml(rs);
+				xml _xml = new chemicalData(rs);
+				_xml.createXML();
 				time = System.currentTimeMillis() - timeBefore;
 				
 			}
