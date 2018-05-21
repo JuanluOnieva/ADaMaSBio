@@ -8,7 +8,7 @@ public class MariaDBConnection extends GenericSqlConnection{
 		props.setProperty("user","root");
 		props.setProperty("password","BDB2018");
 		databases.add("chebi_indexed");
-		databases.add("chebi_indexed");
+		databases.add("chebi_indexedd");
 	}
 
 	@Override
