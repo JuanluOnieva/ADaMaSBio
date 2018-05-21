@@ -17,12 +17,14 @@ public abstract class xml {
 
 	String idprev;
 	FileWriter pw;
-	String id;
-	
+	String id = "";
+	Boolean idInit;
+
 	public xml () throws SQLException, IOException {
 		idprev = "nada";
     	File fichero = new File("prueba.txt");
        	pw = new FileWriter(fichero, true);
+       	idInit = false;
 	}
 	
 public abstract void addValues(ResultSet result) throws SQLException, IOException;
@@ -42,7 +44,7 @@ public abstract void addValues(ResultSet result) throws SQLException, IOExceptio
 	}
 
 	String endLabel(String id) {
-		return "\n</" + id + ">\n";
+		return "</" + id + ">\n";
 	}
 	
 	void escribir(List<String> list) throws IOException {

@@ -5,9 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class chemicalData extends xml {
+public class databaseAccesion extends xml {
     HashMap<String,String> table_id;
-    public chemicalData() throws SQLException, IOException {
+    public databaseAccesion() throws SQLException, IOException {
         super();
         table_id = new HashMap<>();
         table_id.put("name","chemical data");
@@ -24,7 +24,7 @@ public class chemicalData extends xml {
 
         while (result.next()) {
             if(id.equals(result.getString("compound_id"))) {
-                type = result.getString("type").replaceAll(" ","_");
+                type = result.getString("type");
                 value = result.getString("chemical_data");
                 pw.write(startLabel(type));
                 System.out.print(startLabel(type));
@@ -47,8 +47,6 @@ public class chemicalData extends xml {
     }
 
     public void xmlEnd() throws IOException {
-        pw.write(endLabel("id"));
-        System.out.print(endLabel("id"));
         pw.write(endLabel("table"));
         System.out.print(endLabel("table"));
         pw.close();
