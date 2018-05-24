@@ -5,7 +5,19 @@
   <groupId>org.uma.BDB2018</groupId>
   <artifactId>ChEBI</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <packaging>jar</packaging>
 
   <name>ChEBI</name>
   <url>http://maven.apache.org</url>
@@ -38,6 +50,17 @@
 	    <artifactId>postgresql</artifactId>
 	    <version>42.2.2</version>
 	</dependency>
-
+      <dependency>
+          <groupId>org.exist-db</groupId>
+          <artifactId>exist-core</artifactId>
+          <version>4.1.0</version>
+      </dependency>
   </dependencies>
+    <repositories>
+        <repository>
+            <id>exist</id>
+            <url>https://raw.github.com/eXist-db/mvn-repo/master/</url>
+        </repository>
+    </repositories>
+   
 </project>
