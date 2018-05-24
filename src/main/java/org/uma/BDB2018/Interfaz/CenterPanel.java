@@ -73,7 +73,7 @@ public class CenterPanel extends JPanel{
 	*/
 	
 	public void setSQLTime(String t) {
-		txts.setText(""+t+" ms");
+		txts.setText(""+t);
 	}
 	
 	public void setErrorTime(String e) {

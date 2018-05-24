@@ -9,12 +9,12 @@ import java.util.List;
 
 public class Control implements ActionListener {
 
-	ViewMainPanel win ;
-	List<ViewMainPanel> panel;
+	WindowPanel win ;
+	List<WindowPanel> panel;
 	archivo arch;
 	String[] databases = {"chebi_basic", "ChebiIndex", "ChebiStorage", "ChebiOptimize"};
 	
-	public Control(ViewMainPanel w, List<ViewMainPanel> p, archivo a) {
+	public Control(WindowPanel w, List<WindowPanel> p, archivo a) {
 		win = w ;
 		panel =p;
 		arch = a;
@@ -29,19 +29,20 @@ public class Control implements ActionListener {
 				arch.escribir(win.getHistorial());
 				try {
 					win.getConn().executeQuery(win.getComboBox().toString());
-				} catch (IOException e1) {
+				} catch (IOException | SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				for(ViewMainPanel v : panel)
+				for(WindowPanel v : panel)
 					if(v!=win)
 						v.notify(s);
 			}
+			if(win.getConn().hasMoreDB()) {
 			for (String db : win.getConn().availableDbs()){
 				try {
 					win.getConn().connect(db);
 					win.getConn().executeQuery(s);
-					win.getCenterP(win.getConn().dbAdapt(db)).setSQLTime(win.getConn().getTime());
+					win.getCenterP(win.getConn().dbAdapt(db)).setSQLTime(win.getConn().getTime()+" ms");
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					System.out.println(e1.getErrorCode());
@@ -54,6 +55,22 @@ public class Control implements ActionListener {
 				}
 
 				//win.showResult(win.getConn().getRows(), db);
+			}
+			}else {
+				try {
+					win.getConn().executeQuery(s);
+					win.getCenterP(0).setSQLTime(win.getConn().getTime()+" ms");
+					win.getCenterP(1).setSQLTime(win.getConn().getRows());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					System.out.println(e1.getErrorCode());
+					System.out.println(e1.getSQLState());
+					System.out.println(e1.getCause());
+					win.getCenterP(0).setErrorTime("DB not found");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		}
 		

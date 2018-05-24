@@ -16,32 +16,31 @@ import javax.swing.SwingConstants;
 
 import javax.swing.GroupLayout.Alignment;
 
+import org.uma.BDB2018.Driver.DBDriverInterface;
 import org.uma.BDB2018.Driver.GenericSqlConnection;
 
 import javax.swing.JComboBox;
 
-public class ViewMainPanel extends JPanel implements WindowPanel{
+public class ViewMainPanelXQuery extends WindowPanel{
 
 	private JLabel title;
 	private JLabel state;
 	private NorthPanel npanel;
 	private GroupLayout g1_NorthPanel;
-	private CenterPanel cpanelChebi;
-	private CenterPanel cpanelChebiIndex;
-	private CenterPanel cpanelChebiStorage;
-	private CenterPanel cpanelChebiOptimize;
+	private CenterPanel cpanelexistdb;
+	private CenterPanel cpanelexistdb2;
 	public List<String> historial;
-	private GenericSqlConnection dbCon;
+	private DBDriverInterface dbCon;
 	
-	public ViewMainPanel(String SGDB, String status, List<String> hist, GenericSqlConnection sqlCon){
-		dbCon = sqlCon;
+	public ViewMainPanelXQuery(String SGDB, String status, List<String> hist, DBDriverInterface driver){
+		dbCon = driver;
 		historial = hist;
 		setLayout(new GridLayout(8, 2, 0, 0));
 		title = new JLabel(SGDB+" query executer");
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setVerticalAlignment(SwingConstants.CENTER);
 		this.add(title);
-		npanel = new NorthPanel(status, hist);
+		npanel = new NorthPanelXQuery(status, hist);
 		
 		g1_NorthPanel = new GroupLayout(npanel);
 		g1_NorthPanel.setHorizontalGroup(
@@ -65,16 +64,13 @@ public class ViewMainPanel extends JPanel implements WindowPanel{
 		npanel.setLayout(g1_NorthPanel);
 		
 		
-		cpanelChebi = new CenterPanel("Chebi");
-		cpanelChebiIndex = new CenterPanel("ChebiIndex");
-		cpanelChebiStorage = new CenterPanel("ChebiStorage");
-		cpanelChebiOptimize = new CenterPanel("ChebiOptimize");
+		cpanelexistdb = new CenterPanel("eXistDB");
+		cpanelexistdb2 = new CenterPanel("eXistDB rows");
+
 
 		this.add(npanel);
-		this.add(cpanelChebi);
-		this.add(cpanelChebiIndex);
-		this.add(cpanelChebiStorage);
-		this.add(cpanelChebiOptimize);
+		this.add(cpanelexistdb);
+		this.add(cpanelexistdb2);
 		
 		state = new JLabel("Service status: " + status);
 		state.setHorizontalAlignment(SwingConstants.CENTER);
@@ -133,17 +129,16 @@ public class ViewMainPanel extends JPanel implements WindowPanel{
 		npanel.notify(s);
 	}
 	
-	public CenterPanel getCenterP(int db) {
+    public CenterPanel getCenterP(int db) {
 		switch(db){
-		case 0: return cpanelChebi;
-		case 1: return cpanelChebiIndex;
-		case 2: return cpanelChebiStorage;
-		case 3: return cpanelChebiOptimize;
+			case 0: return cpanelexistdb;
+			case 1: return cpanelexistdb2;
+			case -1: return null;
 		default: throw new RuntimeException("No hay base de datos con dicho nombre -> " + db);
 
 	}	}
 	
-	public GenericSqlConnection getConn() {
+	public DBDriverInterface getConn() {
 		return dbCon;
 	}
 	
