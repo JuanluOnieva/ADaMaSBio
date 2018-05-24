@@ -3,7 +3,7 @@ package org.uma.BDB2018.Driver;
 import java.sql.SQLException;
 
 public class MySQLConnection extends GenericSqlConnection{
-	public MySQLConnection() throws SQLException{
+	public MySQLConnection() {
 		url = "jdbc:mysql://localhost:3306";
 		props.setProperty("user","root");
 		props.setProperty("password","BDB2018");

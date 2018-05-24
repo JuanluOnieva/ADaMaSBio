@@ -3,7 +3,7 @@ package org.uma.BDB2018.Driver;
 import java.sql.SQLException;
 
 public class MariaDBConnection extends GenericSqlConnection{
-	public MariaDBConnection() throws SQLException{
+	public MariaDBConnection() {
 		url = "jdbc:mariadb://localhost:3306";
 		props.setProperty("user","root");
 		props.setProperty("password","BDB2018");

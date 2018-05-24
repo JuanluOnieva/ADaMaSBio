@@ -25,6 +25,7 @@ public abstract class GenericSqlConnection implements DBDriverInterface {
 	protected String url;
 	protected Properties props = new Properties();
 	public ArrayList<String> databases = new ArrayList<String>();
+	protected boolean moreDB = true;
 	
 	public void executeQuery(String s) throws IOException{
 		// create a Statement
@@ -62,5 +63,9 @@ public abstract class GenericSqlConnection implements DBDriverInterface {
 
 	public ArrayList<String> availableDbs() {
 		return databases;
+	}
+	
+	public boolean hasMoreDB(){
+		return this.moreDB;
 	}
 }

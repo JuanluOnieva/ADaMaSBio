@@ -3,7 +3,7 @@ import java.sql.SQLException;
 
 public class PostgreSqlConnection extends GenericSqlConnection{
 	
-	public PostgreSqlConnection() throws SQLException {
+	public PostgreSqlConnection() {
 		url = "jdbc:postgresql://0.0.0.0:5432";
 		props.setProperty("user","postgres");
 		databases.add("chebi_basic");

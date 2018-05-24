@@ -2,3 +2,5 @@ select c.id, c.chebi_accession, c.name, c.definition, c.star, cP.id as secondary
 SELECT * FROM exampleTable;
 select * from chemical_data where compound_id = (select id from compounds where name = 'water');
 select * from chemical_data order by compound_id;
+for $x in doc("db/tablasXML/compounds.xml")/table/id where $x/name="water" or $x/definition="water" return ($x/name,$x/star,$x/chebi_accession) 
+for $x in doc("/db/tablasXML/compounds.xml")/table/id where $x/name="water" or $x/definition="water" return ($x/name,$x/star,$x/chebi_accession) 

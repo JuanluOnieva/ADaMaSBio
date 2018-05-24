@@ -62,4 +62,5 @@
             <url>https://raw.github.com/eXist-db/mvn-repo/master/</url>
         </repository>
     </repositories>
+   
 </project>
