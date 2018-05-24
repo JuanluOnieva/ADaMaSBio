@@ -11,9 +11,9 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout.Alignment;
 
-public class NorthPanel extends JPanel{
+public abstract class NorthPanel extends JPanel{
 
-	private JComboBox comboBox;
+	protected JComboBox comboBox;
 	private JButton button;
 	
 	public NorthPanel(String status, List<String> hist){
@@ -21,7 +21,6 @@ public class NorthPanel extends JPanel{
 		comboBox = new JComboBox();
 		fillCombo(hist);
 		comboBox.setEditable(true);
-		comboBox.setSelectedItem("SELECT * FROM exampleTable;");
 		this.add(comboBox);
 		button = new JButton("Execute query");
 		
@@ -54,8 +53,5 @@ public class NorthPanel extends JPanel{
 		}
 	}
 	
-	public void notify(String s){
-		comboBox.addItem(s);
-		comboBox.setSelectedItem("SELECT * FROM exampleTable;");
-	}
+	 public abstract void notify(String s);
 }

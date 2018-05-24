@@ -1,51 +1,56 @@
 package org.uma.BDB2018.xml;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.uma.BDB2018.Interfaz.archivo;
 
-public class xml {
+import javax.xml.stream.events.Attribute;
 
-	private ResultSet result;
-	private String id;
-	private archivo arch = new archivo("prueba.txt");
-	
-	public xml (ResultSet result) throws SQLException {
-		this.result = result;
-		createXML();
+public abstract class xml {
+
+	String idprev;
+	FileWriter pw;
+	String id = "";
+	Boolean idInit;
+
+	public xml () throws SQLException, IOException {
+		idprev = "nada";
+    	File fichero = new File("prueba.txt");
+       	pw = new FileWriter(fichero, true);
+       	idInit = false;
 	}
 	
-	public void createXML() throws SQLException {
-		int cnt = 1;
-		String label = null;
-		String key = null;
-		int num = result.getMetaData().getColumnCount();
-		while (result.next()) {
-			List<String> rowsXML = new LinkedList<>();
-			while (cnt <= num) {
-				label = result.getMetaData().getColumnLabel(cnt);
-				key = result.getString(cnt);
-				if(result.wasNull())
-					key = "NULL";
-				rowsXML.add(startLabel(label) + key + endLabel(label));
-				cnt++;
-			}
-			System.out.println(rowsXML.toString());
-			//arch.escribir(rowsXML);
-			rowsXML.clear();
-			cnt = 1;
+public abstract void addValues(ResultSet result) throws SQLException, IOException;
+	
+	String startLabel(String id) {
+		return "<" + id + ">\n";
+	}
+
+	String startLabel(String id, HashMap<String,String> Attributes) {
+		//Creates a label with attributes
+		StringBuilder tag = new StringBuilder("<" + id);
+		for (String key : Attributes.keySet()){
+			tag.append(' ').append(key).append("=\"").append(Attributes.get(key)).append('\"');
 		}
+		tag.append(">\n");
+		return tag.toString();
+	}
+
+	String endLabel(String id) {
+		return "</" + id + ">\n";
 	}
 	
-	public String startLabel(String id) {
-		return "<" + id + ">";
-	}
-	
-	public String endLabel(String id) {
-		return "</" + id + ">";
+	void escribir(List<String> list) throws IOException {
+		for(String l : list)
+			pw.write(l+"\n");
+		
 	}
 
 }
