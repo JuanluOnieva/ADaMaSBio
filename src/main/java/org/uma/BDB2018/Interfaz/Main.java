@@ -12,15 +12,17 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
+import org.uma.BDB2018.Interfaz.*;
 
 import org.uma.BDB2018.Driver.*;
+import org.xmldb.api.base.XMLDBException;
 
 public class Main extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private List<String> historial;
-	private List<ViewMainPanel> panel;
+	private List<WindowPanel> panel;
 	private archivo arch = new archivo("historial.txt");
 	
 	/**
@@ -43,15 +45,19 @@ public class Main extends JFrame {
 	/**
 	 * Create the frame.
 	 * @throws SQLException 
+	 * @throws XMLDBException 
+	 * @throws IllegalAccessException 
+	 * @throws InstantiationException 
+	 * @throws ClassNotFoundException 
 	 */
-	public Main() throws SQLException {
+	public Main() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException, XMLDBException {
 		
 		if(arch.leer()==null)
 			historial = new LinkedList<String>();
 		else
 			historial = arch.leer();
 		
-		panel = new LinkedList<ViewMainPanel>();
+		panel = new LinkedList<WindowPanel>();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 616, 420);
@@ -73,23 +79,50 @@ public class Main extends JFrame {
 		contentPane.add(tabbedPane);
 		
 		MariaDBConnection mariadb = new MariaDBConnection();
-		//PostgreSqlConnection psql = new PostgreSqlConnection();
-		//MySQLConnection mysql = new MySQLConnection();
+		PostgreSqlConnection psql = new PostgreSqlConnection();
+		MySQLConnection mysql = new MySQLConnection();
+		XQueryDriver existDB = new XQueryDriver();
+		CassandraConnection cassandra = new CassandraConnection();
+		MongoDBConnection mongodb = new MongoDBConnection();
 		
-		ViewMainPanel mainPanel = new ViewMainPanel("PostrgreSQL", "CONNECTED", historial, mariadb);
+		ViewMainPanelSQL mainPanel = new ViewMainPanelSQL("MySQL", "CONNECTED", historial, mysql);
 		panel.add(mainPanel);
-		//ViewMainPanel mainPanel2 = new ViewMainPanel("MariaDB", "CONNECTED", historial, mariadb);
-		//panel.add(mainPanel2);
 		
-		tabbedPane.addTab("PostrgreSQL", null, mainPanel, null);
+		ViewMainPanelSQL mainPanel2 = new ViewMainPanelSQL("MariaDB", "CONNECTED", historial, mariadb);
+		panel.add(mainPanel2);
 		
-		//tabbedPane.addTab("MariaDB", null, mainPanel2, null);
+		ViewMainPanelSQL mainPanel3 = new ViewMainPanelSQL("PostgrSQL", "CONNECTED", historial, psql);
+		panel.add(mainPanel3);
 		
+		ViewMainPanelXQuery mainPanel4 = new ViewMainPanelXQuery("ExistDB", "CONNECTED", historial, existDB);
+		panel.add(mainPanel4);
+		
+		ViewMainPanelSQL mainPanel5 = new ViewMainPanelSQL("Cassandra", "CONNECTED", historial, cassandra);
+		panel.add(mainPanel5);
+		
+		ViewMainPanelSQL mainPanel6 = new ViewMainPanelSQL("Cassandra", "CONNECTED", historial, mongodb);
+		panel.add(mainPanel6);
+		
+		tabbedPane.addTab("MySQL", null, mainPanel, null);
+		tabbedPane.addTab("MariaDB", null, mainPanel2, null);
+		tabbedPane.addTab("PostgreSQL", null, mainPanel3, null);
+		tabbedPane.addTab("ExistDB", null, mainPanel4, null);
+		tabbedPane.addTab("Cassandra", null, mainPanel5, null);
+		tabbedPane.addTab("MongoDB", null, mainPanel6, null);
+
 
 		ActionListener bt = new Control(mainPanel, panel, arch);
-		//ActionListener bt2 = new Control(mainPanel2, panel, arch);
+		ActionListener bt2 = new Control(mainPanel2, panel, arch);
+		ActionListener bt3 = new Control(mainPanel3, panel, arch);
+		ActionListener bt4 = new Control(mainPanel4, panel, arch);
+		ActionListener bt5 = new Control(mainPanel5, panel, arch);
+		ActionListener bt6 = new Control(mainPanel6, panel, arch);
 		mainPanel.controller(bt);
-		//mainPanel2.controller(bt2);
+		mainPanel2.controller(bt2);
+		mainPanel3.controller(bt3);
+		mainPanel4.controller(bt4);
+		mainPanel5.controller(bt5);
+		mainPanel6.controller(bt6);
 		this.pack();
 	}
 

@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import org.uma.BDB2018.xml.chemicalData;
 import org.uma.BDB2018.xml.xml;
 /**
  * 
@@ -24,6 +25,7 @@ public abstract class GenericSqlConnection implements DBDriverInterface {
 	protected String url;
 	protected Properties props = new Properties();
 	public ArrayList<String> databases = new ArrayList<String>();
+	protected boolean moreDB = true;
 	
 	public void executeQuery(String s) throws IOException{
 		// create a Statement
@@ -32,8 +34,11 @@ public abstract class GenericSqlConnection implements DBDriverInterface {
 			time = 0;
 			rowsNumber = 0;
 			long timeBefore = System.currentTimeMillis();
-			try (ResultSet rs = stmt.executeQuery(s)){ 
-				xml _xml = new xml(rs);
+			try (ResultSet rs = stmt.executeQuery(s)){
+			    //Generate XML from query result
+				//xml _xml = new chemicalData();
+				//_xml.addValues(rs);
+				//((chemicalData) _xml).xmlEnd();
 				time = System.currentTimeMillis() - timeBefore;
 				
 			}
@@ -58,5 +63,9 @@ public abstract class GenericSqlConnection implements DBDriverInterface {
 
 	public ArrayList<String> availableDbs() {
 		return databases;
+	}
+	
+	public boolean hasMoreDB(){
+		return this.moreDB;
 	}
 }

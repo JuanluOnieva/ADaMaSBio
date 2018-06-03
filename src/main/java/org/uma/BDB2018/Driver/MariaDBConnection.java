@@ -3,12 +3,12 @@ package org.uma.BDB2018.Driver;
 import java.sql.SQLException;
 
 public class MariaDBConnection extends GenericSqlConnection{
-	public MariaDBConnection() throws SQLException{
+	public MariaDBConnection() {
 		url = "jdbc:mariadb://localhost:3306";
 		props.setProperty("user","root");
 		props.setProperty("password","BDB2018");
 		databases.add("chebi_indexed");
-		databases.add("chebi_indexedd");
+		databases.add("chebi_indexed");
 	}
 
 	@Override
