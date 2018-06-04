@@ -11,15 +11,17 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout.Alignment;
 
-public class NorthPanelSQL extends NorthPanel{
+public class NorthPanelNoSQL extends NorthPanel{
 	
-	public NorthPanelSQL(String status, List<String> hist){
+	public NorthPanelNoSQL(String status, List<String> hist){
+		
 		super(status, hist);
-		comboBox.setSelectedItem("Select * FROM table;");	
+		comboBox.setSelectedItem("Query NoSQL;");	
 	}
 	
 	public void notify(String s){
 		comboBox.addItem(s);
-		comboBox.setSelectedItem("Select * FROM table;");
+		comboBox.setSelectedItem("Query NoSQL");
 	}
 }
+

@@ -97,10 +97,10 @@ public class Main extends JFrame {
 		ViewMainPanelXQuery mainPanel4 = new ViewMainPanelXQuery("ExistDB", "CONNECTED", historial, existDB);
 		panel.add(mainPanel4);
 		
-		ViewMainPanelSQL mainPanel5 = new ViewMainPanelSQL("Cassandra", "CONNECTED", historial, cassandra);
+		ViewMainPanelNoSQL mainPanel5 = new ViewMainPanelNoSQL("Cassandra", "CONNECTED", historial, cassandra);
 		panel.add(mainPanel5);
 		
-		ViewMainPanelSQL mainPanel6 = new ViewMainPanelSQL("Cassandra", "CONNECTED", historial, mongodb);
+		ViewMainPanelNoSQL mainPanel6 = new ViewMainPanelNoSQL("MongoDB", "CONNECTED", historial, mongodb);
 		panel.add(mainPanel6);
 		
 		tabbedPane.addTab("MySQL", null, mainPanel, null);
