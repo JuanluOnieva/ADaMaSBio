@@ -82,7 +82,7 @@ public class Main extends JFrame {
 		PostgreSqlConnection psql = new PostgreSqlConnection();
 		MySQLConnection mysql = new MySQLConnection();
 		XQueryDriver existDB = new XQueryDriver();
-		CassandraConnection cassandra = new CassandraConnection();
+		//CassandraConnection cassandra = new CassandraConnection();
 		MongoDBConnection mongodb = new MongoDBConnection();
 		
 		ViewMainPanelSQL mainPanel = new ViewMainPanelSQL("MySQL", "CONNECTED", historial, mysql);
@@ -97,17 +97,17 @@ public class Main extends JFrame {
 		ViewMainPanelXQuery mainPanel4 = new ViewMainPanelXQuery("ExistDB", "CONNECTED", historial, existDB);
 		panel.add(mainPanel4);
 		
-		ViewMainPanelSQL mainPanel5 = new ViewMainPanelSQL("Cassandra", "CONNECTED", historial, cassandra);
-		panel.add(mainPanel5);
+		//ViewMainPanelSQL mainPanel5 = new ViewMainPanelSQL("Cassandra", "CONNECTED", historial, cassandra);
+		//panel.add(mainPanel5);
 		
-		ViewMainPanelSQL mainPanel6 = new ViewMainPanelSQL("Cassandra", "CONNECTED", historial, mongodb);
+		ViewMainPanelSQL mainPanel6 = new ViewMainPanelSQL("mongodb", "CONNECTED", historial, mongodb);
 		panel.add(mainPanel6);
 		
 		tabbedPane.addTab("MySQL", null, mainPanel, null);
 		tabbedPane.addTab("MariaDB", null, mainPanel2, null);
 		tabbedPane.addTab("PostgreSQL", null, mainPanel3, null);
 		tabbedPane.addTab("ExistDB", null, mainPanel4, null);
-		tabbedPane.addTab("Cassandra", null, mainPanel5, null);
+		//tabbedPane.addTab("Cassandra", null, mainPanel5, null);
 		tabbedPane.addTab("MongoDB", null, mainPanel6, null);
 
 
@@ -115,13 +115,13 @@ public class Main extends JFrame {
 		ActionListener bt2 = new Control(mainPanel2, panel, arch);
 		ActionListener bt3 = new Control(mainPanel3, panel, arch);
 		ActionListener bt4 = new Control(mainPanel4, panel, arch);
-		ActionListener bt5 = new Control(mainPanel5, panel, arch);
+		//ActionListener bt5 = new Control(mainPanel5, panel, arch);
 		ActionListener bt6 = new Control(mainPanel6, panel, arch);
 		mainPanel.controller(bt);
 		mainPanel2.controller(bt2);
 		mainPanel3.controller(bt3);
 		mainPanel4.controller(bt4);
-		mainPanel5.controller(bt5);
+		//mainPanel5.controller(bt5);
 		mainPanel6.controller(bt6);
 		this.pack();
 	}

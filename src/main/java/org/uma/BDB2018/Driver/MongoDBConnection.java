@@ -15,8 +15,11 @@ import org.bson.Document;
 import org.xmldb.api.base.ResourceSet;
 
 import java.util.Arrays;
-import com.mongodb.Block;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.Block;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 import com.mongodb.client.MongoCursor;
 import static com.mongodb.client.model.Filters.*;
 import com.mongodb.client.result.DeleteResult;
@@ -39,13 +42,14 @@ public class MongoDBConnection implements DBDriverInterface{
 	
 	@Override
 	public void executeQuery(String query) throws SQLException, IOException {
-		// TODO Auto-generated method stub
 		String dbName = "chebi_basic";
+		long timeBefore = System.currentTimeMillis();
 		MongoClientURI connectionString = new MongoClientURI("mongodb://localhost:27017");
 		MongoClient mongoClient = new MongoClient(connectionString);
+		String[] querySet = query.split(",");
 		database = mongoClient.getDatabase(dbName);
-		
-		long timeBefore = System.currentTimeMillis();	
+		MongoCollection<Document> collection = database.getCollection(querySet[0]);
+		DBObject queryObject = new BasicDBObject(querySet[1], querySet[2]);			
 		System.out.println(database.getName());
 		time = System.currentTimeMillis() - timeBefore;
 	}
