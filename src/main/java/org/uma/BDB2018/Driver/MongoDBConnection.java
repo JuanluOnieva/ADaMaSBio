@@ -6,12 +6,15 @@ import java.util.List;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.mongodb.QueryBuilder;
 import com.mongodb.ServerAddress;
 
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.xmldb.api.base.ResourceSet;
 
 import java.util.Arrays;
@@ -19,6 +22,7 @@ import java.util.Arrays;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Block;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.client.MongoCursor;
 import static com.mongodb.client.model.Filters.*;
@@ -43,15 +47,21 @@ public class MongoDBConnection implements DBDriverInterface{
 	@Override
 	public void executeQuery(String query) throws SQLException, IOException {
 		String dbName = "chebi_basic";
-		long timeBefore = System.currentTimeMillis();
 		MongoClientURI connectionString = new MongoClientURI("mongodb://localhost:27017");
 		MongoClient mongoClient = new MongoClient(connectionString);
 		String[] querySet = query.split(",");
 		database = mongoClient.getDatabase(dbName);
 		MongoCollection<Document> collection = database.getCollection(querySet[0]);
-		DBObject queryObject = new BasicDBObject(querySet[1], querySet[2]);			
-		System.out.println(database.getName());
+		BasicDBObject queryObject = null;
+		if(querySet.length==3)
+			queryObject = new BasicDBObject(querySet[1], querySet[2]);			
+		else if(querySet.length==4)
+			queryObject = new BasicDBObject(querySet[1], new BasicDBObject(querySet[2], querySet[3]));			
+		long timeBefore = System.currentTimeMillis();
+		FindIterable<Document> cursor = collection.find(queryObject);
 		time = System.currentTimeMillis() - timeBefore;
+		int cnt = 0;
+		System.out.println(cursor.first().toJson());
 	}
 
 	@Override

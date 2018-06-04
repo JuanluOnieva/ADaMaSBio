@@ -13,3 +13,5 @@ SELECT * from compounds where id = 16634;
  select compound_id, type, accession_number from database_accession where type like '%registry%'  order by compound_id;
 chemical_data,ID,1
 chemical_data,ID,2
+SELECT * FROM exampleTable;
+compounds,NAME,$regex,.*water*.
