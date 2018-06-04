@@ -60,7 +60,6 @@ public class MongoDBConnection implements DBDriverInterface{
 		long timeBefore = System.currentTimeMillis();
 		FindIterable<Document> cursor = collection.find(queryObject);
 		time = System.currentTimeMillis() - timeBefore;
-		int cnt = 0;
 		System.out.println(cursor.first().toJson());
 	}
 

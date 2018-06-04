@@ -15,3 +15,4 @@ chemical_data,ID,1
 chemical_data,ID,2
 SELECT * FROM exampleTable;
 compounds,NAME,$regex,.*water*.
+compounds,CHEBI_ACCESSION,CHEBI:15377

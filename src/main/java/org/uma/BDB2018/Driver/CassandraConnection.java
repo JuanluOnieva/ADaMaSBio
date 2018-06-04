@@ -54,7 +54,6 @@ public class CassandraConnection implements DBDriverInterface{
         session.execute("use chebi_basic");
 		long timeBefore = System.currentTimeMillis();	
 		session.execute(query);
-		
 		time = System.currentTimeMillis() - timeBefore;
 	}
 
